@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Profundiza — Lee de verdad</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===== ONBOARDING ===== -->
+  <section id="onboarding" class="screen">
+    <div class="onboard-inner">
+      <div class="brand">
+        <span class="brand-mark">▮</span>
+        <h1>Profundiza</h1>
+        <p class="tagline">Leer de verdad, en 30 segundos a la vez.</p>
+      </div>
+
+      <div class="pick">
+        <h2>¿Qué te llama la atención?</h2>
+        <p class="muted">Elige al menos uno. El feed se adapta a ti.</p>
+        <div id="interests" class="chips"></div>
+      </div>
+
+      <div class="name-field">
+        <label for="studentName">Tu nombre <span class="muted">(así tu profe ve tu avance)</span></label>
+        <input id="studentName" type="text" placeholder="Ej. Valentina Hernández" maxlength="40" autocomplete="off" />
+      </div>
+
+      <button id="startBtn" class="btn-primary" disabled>Empezar a leer</button>
+      <button id="teacherBtn" class="btn-ghost">🧑‍🏫 Soy docente — ver mi grupo</button>
+      <button id="pitchBtn" class="btn-ghost">🎤 Ver pitch (proyectar)</button>
+
+      <div class="how">
+        <div class="how-step"><span>1</span> Lee a tu ritmo</div>
+        <div class="how-step"><span>2</span> Medimos tu atención</div>
+        <div class="how-step"><span>3</span> Nos adaptamos a ti</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEED ===== -->
+  <section id="feed" class="screen hidden">
+    <header class="topbar">
+      <div class="brand-mini">▮ Profundiza</div>
+      <div class="stats">
+        <div class="stat" title="Tu nivel de atención (se adapta)">🎯 <span id="focus">20s</span></div>
+        <div class="stat" title="Racha">🔥 <span id="streak">0</span></div>
+        <div class="stat" title="Puntos">⭐ <span id="points">0</span></div>
+        <div class="stat level" title="Nivel">Nv<span id="level">1</span></div>
+      </div>
+    </header>
+
+    <div id="track" class="track">
+      <!-- cards injected -->
+    </div>
+
+    <footer class="bottombar">
+      <button id="prevBtn" class="nav-btn" aria-label="Anterior">↑</button>
+      <div class="progress">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <button id="nextBtn" class="nav-btn" aria-label="Siguiente">↓</button>
+    </footer>
+
+    <div id="toast" class="toast hidden"></div>
+  </section>
+
+  <!-- ===== TEACHER ===== -->
+  <section id="teacher" class="screen hidden">
+    <header class="topbar">
+      <div class="brand-mini">🧑‍🏫 Panel docente</div>
+      <button id="teacherBackBtn" class="nav-btn" style="width:auto;padding:0 14px;font-size:.9rem">← Salir</button>
+    </header>
+    <div class="teacher-scroll">
+      <div class="teacher-head">
+        <h2 id="teacherClassTitle">3.° B — Secundaria</h2>
+        <p class="muted" id="teacherStatus">Diagnóstico de comprensión lectora · actualizado hoy</p>
+        <div class="teacher-actions">
+          <button id="exportBtn" class="btn-ghost">⬇ Exportar CSV</button>
+          <button id="demoBtn" class="btn-ghost">✨ Ver datos demo</button>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="kpi-num" id="kpiAvg">0%</div><div class="kpi-label">Promedio del grupo</div></div>
+        <div class="kpi warn"><div class="kpi-num" id="kpiLow">0</div><div class="kpi-label">Alumnos bajo el mínimo</div></div>
+        <div class="kpi good"><div class="kpi-num" id="kpiHigh">0</div><div class="kpi-label">En nivel profundo</div></div>
+      </div>
+
+      <div class="insight" id="insight"></div>
+
+      <div class="panel">
+        <div class="panel-title">Distribución del grupo</div>
+        <div class="dist">
+          <div class="dist-bar">
+            <div class="dist-fill low" id="distLow" style="width:0%"></div>
+            <div class="dist-fill mid" id="distMid" style="width:0%"></div>
+            <div class="dist-fill high" id="distHigh" style="width:0%"></div>
+          </div>
+          <div class="dist-legend"><span><i class="sw low"></i>En riesgo</span><span><i class="sw mid"></i>En camino</span><span><i class="sw high"></i>Profundo</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Alumnos · 45</div>
+        <div id="studentList" class="student-list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Textos que más cuestan</div>
+        <div id="hardTexts" class="hard-texts"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PITCH ===== -->
+  <section id="pitch" class="screen hidden">
+    <div class="pitch-wrap">
+      <div class="pitch-top">
+        <span class="pitch-tag">Hackathon UniconHub · CDMX</span>
+        <button id="pitchCloseBtn" class="pitch-close">✕</button>
+      </div>
+      <div class="pitch-body">
+        <h1 class="pitch-hero">2 de cada 3 jóvenes de 15 años<br>no dominan lo básico</h1>
+
+        <div class="pitch-stats">
+          <div class="pstat"><span class="pnum" data-n="34">0</span><span class="plab">Matemáticas<br><b>México</b> vs 69% OCDE</span></div>
+          <div class="pstat"><span class="pnum" data-n="53">0</span><span class="plab">Lectura<br><b>México</b> vs 74% OCDE</span></div>
+          <div class="pstat"><span class="pnum" data-n="10">0</span><span class="plab">Años<br>empeorando</span></div>
+        </div>
+
+        <p class="pitch-insight">Hoy cualquier estudiante obtiene la respuesta de una IA sin entender cómo.<br>Eso <b>no cierra la brecha: la esconde</b>.</p>
+
+        <h2 class="pitch-sol">Profundiza — tecnología que te impulsa a <span>pensar</span>,<br>no a saltarte el razonamiento.</h2>
+
+        <div class="pitch-pillars">
+          <div class="pillar">📚 <b>Lectura profunda</b><span>feed de micro-textos con comprensión</span></div>
+          <div class="pillar">🧑‍🏫 <b>Diagnóstico real</b><span>45 alumnos, un vistazo</span></div>
+          <div class="pillar">🧠 <b>IA que enseña</b><span>pistas, nunca respuestas</span></div>
+        </div>
+
+        <p class="pitch-foot">Construido en 12 horas · un problema, una comunidad, un país.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESULTS ===== -->
+  <section id="results" class="screen hidden">
+    <div class="results-inner">
+      <div class="brand"><span class="brand-mark">▮</span><h1>Profundiza</h1></div>
+      <div class="score-ring" id="scoreRing">
+        <div class="score-pct" id="scorePct">0%</div>
+      </div>
+      <h2 id="resultTitle">¡Lo lograste!</h2>
+      <p id="resultMsg" class="muted"></p>
+
+      <div class="result-grid">
+        <div class="result-card"><div class="rc-num" id="rCorrect">0</div><div class="rc-label">Correctas</div></div>
+        <div class="result-card"><div class="rc-num" id="rStreak">0</div><div class="rc-label">Mejor racha</div></div>
+        <div class="result-card"><div class="rc-num" id="rLevel">1</div><div class="rc-label">Nivel</div></div>
+        <div class="result-card"><div class="rc-num" id="rFocus">0s</div><div class="rc-label">Atención máx.</div></div>
+        <div class="result-card"><div class="rc-num" id="rWords">0</div><div class="rc-label">Palabras leídas</div></div>
+        <div class="result-card"><div class="rc-num" id="rTime">0s</div><div class="rc-label">Tiempo enfocado</div></div>
+      </div>
+
+      <div class="result-actions">
+        <button id="againBtn" class="btn-primary">Leer otra ronda</button>
+        <button id="resetBtn" class="btn-ghost">Reiniciar progreso</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
