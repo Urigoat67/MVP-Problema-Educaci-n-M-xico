@@ -1,0 +1,120 @@
+Aula de Retos
+Especificación funcional y técnica para el equipo
+Función del sistema
+Aula de Retos ayuda a escuelas de primaria y secundaria a trabajar problemas que requieren explicar el razonamiento. El docente prepara la actividad, el alumno propone y justifica una solución y Dirección usa evidencia de aprendizaje y participación para decidir dónde ofrecer apoyo.
+La versión escolar se organiza en tres portales: Alumno, Docente y Dirección. La familia acompaña desde el recorrido del alumno. Si se habilita el acceso propio de un tutor, su alcance será el de los alumnos vinculados. El prototipo Next.js ofrece los tres portales con datos ficticios. Cada ruta abre un inicio de sesión simulado con usuario y contraseña precargados. El acceso de producción y la integración persistente entre portales forman parte del siguiente desarrollo.
+Módulo
+Qué resuelve
+Banco de problemas
+Organiza retos y prácticas por grado, área y habilidad. Conserva enunciado, origen, referencia curricular, rúbrica y versiones aprobadas.
+Actividades de aula
+Vincula una versión del problema con una clase, participantes, modalidad, horario y reglas de trabajo. Guarda entregas y valoraciones por criterio.
+Práctica y avance
+Ofrece ejercicios por materia y retos multidisciplinarios, con opción de practicar con un tutor. Registra avance personal y créditos cuando corresponda.
+Clasificación
+Muestra posición general y por materia dentro de una cohorte. Para el primer incremento se propone grupo y ciclo.
+Seguimiento escolar
+Combina indicadores de participación y desempeño para orientar apoyos y revisar su evolución.
+Navegación del prototipo
+Ruta
+Entrada
+/
+Selector de portales.
+/docente
+Mis clases, Banco de problemas, Preparar actividad y Desempeño.
+/alumno
+Mi tablero, Materias, Retos y Mi avance.
+/director
+Tablero de desempeño escolar.
+/docente/proyectar
+Proyección de las propuestas y evaluaciones de la ronda. Se abre desde la actividad docente.
+Uso de inteligencia artificial
+Cómo aprende el alumno a usar la IA
+    1. Proponer una solución. Lee el reto, identifica qué debe resolver, extrae datos y registra su estrategia y conclusión. Puede equivocarse o dejar un paso incompleto. El tutor le pide que explique su razonamiento con sus palabras.
+    2. Construir y revisar el prompt. Al pulsar Confirmar datos cargados, la vista previa muestra objetivo, contexto del reto, propuesta, pregunta u orientación opcional y respuesta esperada. La propuesta mantiene los datos, operaciones y conclusión que escribió el alumno. Si cambia el borrador, vuelve a confirmarlo antes de evaluar.
+    3. Usar la retroalimentación. La propuesta aparece como mensaje y el asistente muestra las etapas Pensando, Analizando la propuesta y Preparando la retroalimentación. Después presenta el puntaje, un acierto, un siguiente paso y una rúbrica desplegable. El alumno puede contrastar la sugerencia con el enunciado y revisar su explicación.
+La evaluación usa cuatro criterios: comprensión (2 puntos), datos (2), operaciones (3) y conclusión (3). El propósito es que el alumno practique dar contexto, mostrar evidencia y pedir una ayuda específica. La devolución propone pasos de mejora y deja la resolución en manos del alumno.
+Funciones actuales y futuras
+Evaluación en el prototipo. Next.js, React y TypeScript implementan la captura y la presentación. La ruta de servidor POST /api/evaluar recibe el reto, la propuesta y la orientación opcional, y valida el resultado estructurado de OpenAI. La clave se configura en el servidor con OPENAI_API_KEY. Las respuestas precargadas permiten mostrar evaluaciones de ejemplo sin clave. Las etapas de la interfaz indican espera y preparación de la respuesta.
+Funciones previstas. La generación de retos, la extracción curricular y el análisis agregado se contemplan para iteraciones posteriores.
+Generación de material. A partir del objetivo del docente y de materiales curriculares seleccionados, la IA puede proponer un enunciado, habilidades, una solución esperada, una rúbrica y una pista. El equipo pedagógico o el docente revisan la referencia y aprueban el contenido antes de publicarlo.
+Organización de información. La IA puede extraer campos curriculares de fuentes aprobadas y agrupar errores frecuentes en respuestas ya registradas. El sistema recoge y conserva las entregas, resultados y reportes mediante sus propios formularios. Los resúmenes de IA se presentan como sugerencias verificables y el acceso a datos identificables se limita por rol. Los cálculos oficiales del producto salen de reglas y registros, con revisión docente para publicar valoraciones.
+Portal del docente
+El docente abre Mis clases, selecciona un grupo y revisa su lista. Para preparar una sesión elige qué problema se trabajará y cómo se trabajará. Son dos decisiones que quedan registradas en una actividad.
+Decisión
+Flujo
+Elegir la tarea
+Buscar en el banco por grado, área o habilidad. Revisar enunciado, referencia y criterios. También puede crear un problema propio o solicitar un borrador de IA y editarlo antes de aprobarlo.
+Configurar el proceso
+Elegir modalidad individual o por equipos. Indicar participantes, instrucciones, horario, rondas y ayuda permitida. En equipos, asignar alumnos y confirmar la lista antes de iniciar.
+Publicar y conducir
+Verificar destinatarios, horario y versión del reto. Publicar para la clase y abrir la actividad. Acompañar el trabajo y revisar las propuestas conforme llegan.
+Valorar y retroalimentar
+Evaluar con la rúbrica, consultar la respuesta y publicar una devolución. Identificar qué criterios requieren atención y decidir si conviene una nueva ronda o una práctica posterior.
+Secuencia de trabajo en aula
+    1. Comprender. Identificar qué pregunta se busca responder y qué datos se tienen.
+    2. Proponer. Mostrar el cálculo, método o argumento que respalda la respuesta.
+    3. Explicar y revisar. Presentar la propuesta y ajustar el razonamiento después de recibir comentarios.
+Recorrido disponible en la demo
+    1. En Mis clases, el docente elige uno de sus cinco grupos de 20 alumnos y abre Preparar actividad. En 6.º A puede mostrar el Reto del agua, dos equipos y una ronda. Puede modificar la asignación y añadir una orientación para la evaluación.
+    2. En el espacio de cada equipo, captura la propuesta o pulsa Cargar datos para demo. Al confirmar, obtiene la vista previa del prompt de ese equipo.
+    3. En Volver al reto, pulsa Evaluar propuestas con IA. Las propuestas confirmadas se evalúan en paralelo y cada resultado aparece cuando termina. Proyectar sigue la misma ronda y sus estados en otra pestaña del mismo navegador.
+    4. Tras completar las evaluaciones, puede Finalizar actividad. En el ejemplo, un equipo obtiene 8/10 y el otro 5/10. El segundo confunde 20 % con 20 litros y recibe una pista para reconsiderar la operación.
+Desempeño muestra el nivel, puntaje, participación y evolución de los alumnos de los cinco grupos del docente con datos de ejemplo.
+Rastro de una actividad en el producto
+Una actividad conserva la versión publicada del problema y de la rúbrica, los participantes y el horario. Los cambios posteriores al banco generan una nueva versión. Cada entrega conserva autoría, argumentos, fecha y estado. La valoración es un registro separado y su publicación controla cuándo aparece para el alumno.
+Portal del alumno
+El alumno entra a su tablero, identifica la actividad de su clase y puede ir a Materias, Retos o Mi avance. La interfaz usa consignas breves y un botón principal por tarea. Al entregar, recibe una confirmación. En el reto multidisciplinario de la demo, puede solicitar una evaluación formativa y revisar qué hizo bien y qué necesita mejorar.
+Espacio
+Experiencia
+Mi tablero
+Muestra el reto asignado, la clase, el horario y su estado. Cuando está abierto, el alumno puede leer la consigna, explicar su solución y entregarla.
+Materias y Retos
+Ofrece práctica individual por área y retos que combinan disciplinas. Por ejemplo, analizar el consumo de agua puede trabajar Matemáticas y Ciencias.
+Practicar con mi tutor
+Presenta preguntas para que el acompañante guíe la lectura o pida una explicación. El alumno conserva la autoría de su respuesta.
+Mi avance
+Muestra retos terminados y habilidades trabajadas. La sección «Clasificación de mi grupo» permite cambiar entre General, Matemáticas, Ciencias y Lengua en la demo.
+Ejemplo de lectura ciencias y matemáticas
+En ¿Dónde crecerán los frijoles?, Sofía lee una historia con 24 semillas y cuatro charolas. Propone seis por charola y elige la ventana, pero deja la operación sin escribir y explica que «ahí está más clarito». Ingresar datos para demo precarga ese intento y una pregunta para la IA. Confirmar datos cargados muestra el prompt. Al pulsar Evaluar respuesta, la demo devuelve 7/10 y le pide comprobar el reparto y buscar en la lectura evidencia sobre la luz. Puede editar su respuesta para volver a intentarlo con la evaluación configurada.
+Créditos y clasificación
+Los créditos personales reconocen el cumplimiento de un objetivo habilitado. El primer diseño propone un crédito por alumno y objetivo, incluso si hay reintentos. La puntuación de clasificación proviene de retos escolares comparables, elegibles y con valoración publicada. La práctica libre y los reportes familiares quedan fuera del ranking.
+En un reto cuyo criterio de Matemáticas vale 10 y el de Ciencias vale 10, una valoración de 8 y 6 aporta 8 a Matemáticas, 6 a Ciencias y 14 a General. El acumulado usa una sola valoración vigente por alumno y actividad. En empate se comparte posición. La demo muestra resultados ficticios, como Sofía en tercer lugar general y primero en Matemáticas. El canje de créditos y la fórmula definitiva quedan por validar.
+Portal de Dirección
+En la demo, Dirección puede filtrar los seis grados de primaria, con dos grupos por grado y 20 alumnos por grupo. Los cinco grupos del docente comparten las mismas listas en ambos portales. El tablero muestra nivel, puntaje y participación por grado, grupo y alumno en tres cortes ficticios. El panorama inicial presenta un nivel medio-bajo para ilustrar cómo se identificarían oportunidades de refuerzo.
+En el producto, Dirección podrá comparar habilidades y abrir casos autorizados con evidencia individual. Los indicadores deberán mostrar su denominador y el periodo para que el equipo escolar sepa qué población representa cada cifra.
+Indicador
+Regla propuesta
+Participación
+Alumnos convocados que entregaron ÷ alumnos convocados. En actividades por equipo se define la atribución antes de usar el indicador.
+Valoración
+Entregas con valoración publicada ÷ entregas recibidas.
+Logro por habilidad
+Valoraciones que alcanzaron el umbral del criterio ÷ valoraciones publicadas que incluyen ese criterio.
+Seguimiento
+Resultado anterior y reciente del mismo criterio en actividades comparables. Se muestran los conteos de cada medición.
+Barreras y apoyos
+Si se habilitan reportes, Dirección puede medir respuestas, barreras reportadas y apoyos activos con sus denominadores correspondientes.
+De un hallazgo a una estrategia
+Si el grupo calcula adecuadamente pero tiene dificultades al justificar, Dirección puede acordar que el docente modele cómo enlazar un dato con una conclusión. Se registra la medida, el responsable y la fecha de revisión. En un reto posterior se contrasta el mismo criterio para observar si hubo progreso. La decisión sobre el apoyo es del equipo escolar.
+Las barreras de acceso se recogen, cuando se habiliten, mediante un reporte opcional. Su propósito es facilitar una acción como ofrecer tiempo de práctica en el plantel. Se muestran únicamente a personal autorizado para acompañar el caso y quedan fuera de las valoraciones y puntuaciones.
+Alcance de implementación
+Prototipo actual. Los recorridos de evaluación y la proyección funcionan en la demo. El inicio de sesión es simulado. Los resultados de las actividades todavía no alimentan el tablero de Dirección ni la clasificación de ejemplo.
+Primer incremento del producto. La primera entrega funcional conecta un docente, un grupo de prueba y una actividad individual. El docente publica un reto aprobado, el alumno entrega una explicación y el docente publica una valoración. Con esos registros, el alumno consulta su avance y Dirección comprueba que se actualizaron sus indicadores.
+Incremento
+Resultado verificable
+Actividad y entrega
+Cuentas de prueba, acceso por rol, banco con versiones, publicación, entrega y devolución de una actividad.
+Avance y Dirección
+Clasificación con valoraciones elegibles, participación, logro por criterio y detalle autorizado por alumno.
+Ampliaciones
+Equipos, rondas, práctica acompañada integrada al historial, estrategias de apoyo e IA para borradores y análisis asistido. Se implementan según prioridad del equipo.
+Permisos y datos
+En el producto, el servidor deberá verificar el acceso por plantel y rol en cada operación. El docente administra sus clases, el alumno entrega y consulta su historial, y Dirección ve los indicadores y casos autorizados de su plantel. El tutor vinculado puede ver solo el progreso compartido. Los perfiles del pitch son ficticios y sirven para desarrollo y pruebas.
+Decisiones por validar
+    • Fuente y proceso de revisión del contenido curricular y de las rúbricas.
+    • Alcance de la clasificación por grupo, grado y ciclo, fórmula final y tratamiento de actividades por equipo.
+    • Momento y reglas para habilitar IA, cuestionario, acceso familiar y registro de apoyos.
+    • Arquitectura de producción, proveedor de IA, retención de datos y responsables de validación.
+    • Indicadores para medir en un piloto si los alumnos mejoran la calidad de sus explicaciones y de los prompts que escriben.
+El README acompaña esta especificación con el modelo mínimo, reglas de persistencia, contratos funcionales y criterios de aceptación que el equipo puede convertir en tareas.
