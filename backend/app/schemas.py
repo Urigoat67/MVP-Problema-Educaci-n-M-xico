@@ -89,3 +89,21 @@ class GrupoOut(ORMModel, GrupoBase):
     docente_id: int | None
     activo: bool
     created_at: datetime
+
+
+# Reel ----------------------------------------------------------------------
+class ReelCreate(BaseModel):
+    tema: str = Field(min_length=2, max_length=200)
+    nivel: str = Field(default="primaria", pattern=r"^(primaria|secundaria)$")
+
+
+class ReelOut(ORMModel):
+    id: int
+    tema: str
+    nivel: str
+    titulo: str
+    status: str
+    duracion: float | None
+    error: str | None
+    created_at: datetime
+

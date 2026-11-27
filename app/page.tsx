@@ -10,5 +10,13 @@ export default function Home() {
         <h2>{portal.name}</h2><p>{portal.description}</p><strong>Entrar a {portal.name}</strong>
       </Link>)}
     </section>
+    <section className="section">
+      <Link className="card portal" href="/reels">
+        <span className="symbol" aria-hidden="true">🎬</span>
+        <h2>Reels de aprendizaje</h2>
+        <p>Ghopper te genera videos cortos animados para aprender un tema en 15 segundos.</p>
+        <strong>Crear un video</strong>
+      </Link>
+    </section>
   </Shell>;
 }

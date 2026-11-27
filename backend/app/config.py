@@ -28,6 +28,17 @@ class Settings(BaseSettings):
     seed_admin_username: str = "admin"
     seed_admin_password: str = "AdminAula2026"
 
+    # Reels
+    media_dir: str = "./media"
+    reel_fps: int = 24
+    reel_width: int = 720
+    reel_height: int = 1280
+    reel_max_duration: float = 20.0
+    edge_tts_voice: str = "es-MX-DaliaNeural"
+    llm_api_key: str | None = None
+    llm_base_url: str = "https://api.deepseek.com/v1"
+    llm_model: str = "deepseek-chat"
+
 
 @lru_cache
 def get_settings() -> Settings:

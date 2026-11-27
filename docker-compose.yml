@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: dev
-    command: npm run dev
+    command: npx next dev --hostname 0.0.0.0
     ports:
       - "3000:3000"
     environment:
