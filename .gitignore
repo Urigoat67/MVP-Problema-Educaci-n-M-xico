@@ -7,3 +7,13 @@ out/
 next-env.d.ts
 
 !.env.example
+!backend/.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.db
+*.sqlite3
+.pytest_cache/
